@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Sign Up Form </title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" language="JavaScript"> 
+    window.onload=validPassword();
+    window.onload=validEmail();
+    function validPassword(){
+            // at least one number, one lowercase and one uppercase letter
+            // at least six characters that are letters, numbers or the underscore
+            var pass=document.forms["signupForm"]["Password"].value;
+            var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+            if(!pass.match(re) || pass=="")
+            {
+		       document.getElementById("new-pass").style.borderColor= "#eb3730";
+	        }
+            else
+            {
+                document.getElementById("new-pass").style.borderColor="#00FF00";
+            }
+    }
+    function validEmail(){
+             var z=document.forms["signupForm"]["mail"].value;
+             var valide=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+             if(!z.match(valide))
+             {
+                document.getElementById("mail").style.borderColor= "#eb3730";
+	         }
+            else
+            {
+                document.getElementById("mail").style.borderColor="#00FF00";
+            }
+    }
+    function checkuser(){
+        var user=document.forms["signupForm"]["mail"].value;
+        <?php
+        $conn=mysqli_connect("localhost","root","","Project");
+        $sql4="select * from WData where ";
+	    $result=mysqli_query($conn,$sql4);
+        if(mysqli_num_rows($result)>0)
+        {
+            alert("Email-id already exists");
+        }
+        mysqli_close($conn);
+        ?>
+    }
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<!-- Meta tag Keywords -->
+<!-- css files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/font-awesome_1.min.css" rel="stylesheet" type="text/css" media="all">
+<!-- //css files -->
+<!-- online-fonts -->
+<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'><link href='//fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+   
+</head><!--/head-->
+
+<body>
+<?php
+include('sessions/session.php');
+if(!isset($login_session))
+{ ?>
+    <header id="header" role="banner">
+        <div class="container">
+            <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.php"><i class="icon-home"></i></a></li>
+                        <li><a href="project.php">Projects</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="signup.html" target="_blank" class="btn btn-primary btn-sm">Signup</a></li>
+                    	<li><a href="sessions/loginindex.php" target="_blank" class="btn btn-primary btn-sm">Log In</a></li>
+                    </ul>                  
+                </div>
+            </div>
+        </div>
+
+    </header>
+ <?php  }
+   else
+   { ?>
+   	<header id="header" role="banner">
+        <div class="container">
+            <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.php"><i class="icon-home"></i></a></li>
+                        <li><a href="projects.php">Projects</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="sessions/logout.php" target="_blank" class="btn btn-primary btn-sm">Logout</a></li>
+                    </ul>                  
+                </div>
+            </div>
+        </div>
+
+    </header>
+ <?php   }
+    ?><!--/#header-->
+<!-- Meta tag Keywords --
+<!--header-->
+	<div class="header-w3l">		
+	</div>
+<!--//header-->
+<!--main-->
+<div class="main-agileits"><br><br>
+	<h2 class="sub-head">Sign Up</h2>
+		<div class="sub-main">	
+			<form name="signupForm" action="register1.php" method="post" onsubmit="checkuser()">
+				<input placeholder="First Name" name="fname" class="name" type="text" required="">
+					<span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span><br>
+				
+                <input placeholder="Last Name" name="lname" class="name2" type="text" required="">
+					<span class="icon2"><i class="fa fa-user" aria-hidden="true"></i></span><br>
+				
+                <input placeholder="Phone Number" name="Number" class="number" type="text" required="">
+					<span class="icon3"><i class="fa fa-phone" aria-hidden="true"></i></span><br>
+				
+                <input placeholder="Email" name="mail" id="mail" class="mail" type="text" onchange="validEmail()">
+					<span class="icon4"><i class="fa fa-envelope" aria-hidden="true"></i></span><br>
+				
+                <input  placeholder="Password" name="Password" id="new-pass" class="pass" type="password" onchange="validPassword()">
+					<span class="icon5"><i class="fa fa-unlock" aria-hidden="true"></i></span><br>
+				
+                <input  placeholder="Confirm Password" name="Password" class="pass" type="password" required="">
+					<span class="icon6"><i class="fa fa-unlock" aria-hidden="true"></i></span><br>
+				
+                <select name="jtype" id=sel_style  required>
+				 	<option value="" disabled selected>Select your profile type</option>
+  					<option value="Hire">Want to work</option>
+  					<option value="Work">Want to hire</option>
+				</select><br>
+				<input type="submit" value="sign up"> <br>
+                 <h3>Already a member?<h3>
+                  <a href="sessions/loginindex.php">
+                     <input type="submit" value="login here">
+                  </a>
+			</form>
+		</div>
+		<div class="clear"></div>
+</div>
+<!--//main-->
+</body>
+</html>

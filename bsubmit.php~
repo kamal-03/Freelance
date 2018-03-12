@@ -1,0 +1,26 @@
+<?php
+        session_start();// Starting Session
+        $conn = mysqli_connect("localhost", "root", "akash","Project");
+        
+        $login_session=$_SESSION['login_user'];
+        $noo=1;
+        while(true)
+        {
+            if($_POST["data"]==$noo)
+            {
+                $temp=$_SESSION['$a['.$noo.']'];
+                $sql="insert into bdetails(pname,uname) values ('$temp','$login_session')";
+                if(mysqli_query($conn,$sql))
+                { 
+                    echo "<br>Insertion successful<br>";
+                }
+                else 
+                {
+                    echo "Data not inserted<br>".$conn->error;
+                }
+             break;
+            }
+            $noo++;
+         
+        }
+?>
